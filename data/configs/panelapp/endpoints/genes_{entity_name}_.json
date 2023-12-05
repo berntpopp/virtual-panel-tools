@@ -1,0 +1,45 @@
+{
+  "host": "panelapp.genomicsengland.co.uk",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/api/v1",
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Format: \"Token <strong>your token</strong>\". You can find API token in your <a href=\"/accounts/profile/\">profile page</a>"
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ],
+  "endpoint": "/genes/{entity_name}/",
+  "get": {
+    "operationId": "genes_read",
+    "description": "Search Genes",
+    "parameters": [],
+    "responses": {
+      "200": {
+        "description": "",
+        "schema": {
+          "$ref": "#/definitions/Gene"
+        }
+      }
+    },
+    "tags": [
+      "genes"
+    ]
+  },
+  "parameters": [
+    {
+      "name": "entity_name",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    }
+  ]
+}

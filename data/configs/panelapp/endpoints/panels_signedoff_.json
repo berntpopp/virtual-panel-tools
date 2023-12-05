@@ -1,0 +1,86 @@
+{
+  "host": "panelapp.genomicsengland.co.uk",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/api/v1",
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Format: \"Token <strong>your token</strong>\". You can find API token in your <a href=\"/accounts/profile/\">profile page</a>"
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ],
+  "endpoint": "/panels/signedoff/",
+  "get": {
+    "operationId": "panels_signedoff_list",
+    "summary": "Signed Off Panels Versions",
+    "description": "By default only the latest versions on public panels are returned.\n\nTo get all public and retired panels use `display=all` URL parameter.\nThis also returns previous versions for the panels.\n\nYou can also filter by `panel_id` to return only the versions for a\nspecific panel. To get all versions for a panel use both `display=all`\nand `panel_id` together.",
+    "parameters": [
+      {
+        "name": "panel_id",
+        "in": "query",
+        "description": "",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "display",
+        "in": "query",
+        "description": "",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "A page number within the paginated result set.",
+        "required": false,
+        "type": "integer"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "",
+        "schema": {
+          "required": [
+            "count",
+            "results"
+          ],
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer"
+            },
+            "next": {
+              "type": "string",
+              "format": "uri",
+              "x-nullable": true
+            },
+            "previous": {
+              "type": "string",
+              "format": "uri",
+              "x-nullable": true
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HistoricalSnapshot"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tags": [
+      "panels"
+    ]
+  },
+  "parameters": []
+}

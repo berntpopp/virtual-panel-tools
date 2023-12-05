@@ -1,0 +1,84 @@
+{
+  "host": "panelapp.genomicsengland.co.uk",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/api/v1",
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Format: \"Token <strong>your token</strong>\". You can find API token in your <a href=\"/accounts/profile/\">profile page</a>"
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ],
+  "endpoint": "/panels/{panel_pk}/regions/{region_entity_name}/evaluations/",
+  "get": {
+    "operationId": "panels_regions_evaluations_list",
+    "description": "",
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "A page number within the paginated result set.",
+        "required": false,
+        "type": "integer"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "",
+        "schema": {
+          "required": [
+            "count",
+            "results"
+          ],
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer"
+            },
+            "next": {
+              "type": "string",
+              "format": "uri",
+              "x-nullable": true
+            },
+            "previous": {
+              "type": "string",
+              "format": "uri",
+              "x-nullable": true
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Evaluation"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tags": [
+      "panels"
+    ]
+  },
+  "parameters": [
+    {
+      "name": "panel_pk",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    },
+    {
+      "name": "region_entity_name",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    }
+  ]
+}

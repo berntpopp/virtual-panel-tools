@@ -1,0 +1,92 @@
+{
+  "host": "panelapp.genomicsengland.co.uk",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/api/v1",
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Format: \"Token <strong>your token</strong>\". You can find API token in your <a href=\"/accounts/profile/\">profile page</a>"
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ],
+  "endpoint": "/entities/",
+  "get": {
+    "operationId": "entities_list",
+    "description": "Search Entities",
+    "parameters": [
+      {
+        "name": "type",
+        "in": "query",
+        "description": "Multiple values may be separated by commas.",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "tags",
+        "in": "query",
+        "description": "Multiple values may be separated by commas.",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "entity_name",
+        "in": "query",
+        "description": "Multiple values may be separated by commas.",
+        "required": false,
+        "type": "string"
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "A page number within the paginated result set.",
+        "required": false,
+        "type": "integer"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "",
+        "schema": {
+          "required": [
+            "count",
+            "results"
+          ],
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer"
+            },
+            "next": {
+              "type": "string",
+              "format": "uri",
+              "x-nullable": true
+            },
+            "previous": {
+              "type": "string",
+              "format": "uri",
+              "x-nullable": true
+            },
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "tags": [
+      "entities"
+    ]
+  },
+  "parameters": []
+}

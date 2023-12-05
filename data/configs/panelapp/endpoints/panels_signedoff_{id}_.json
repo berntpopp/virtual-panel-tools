@@ -1,0 +1,46 @@
+{
+  "host": "panelapp.genomicsengland.co.uk",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/api/v1",
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Format: \"Token <strong>your token</strong>\". You can find API token in your <a href=\"/accounts/profile/\">profile page</a>"
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ],
+  "endpoint": "/panels/signedoff/{id}/",
+  "get": {
+    "operationId": "panels_signedoff_read",
+    "summary": "!!! Deprecated - see notes",
+    "description": "Instead, use list of signed off panels endpoint with `panel_id=<panel id>`\nparameter to get the latest version, and then use\n`/api/v1/panels/<panel_id>/?version=<major_version>.<minor_version>` to get\nthe panel data.\n\nThis endpoint will be removed in the second part of 2021.",
+    "parameters": [],
+    "responses": {
+      "200": {
+        "description": "",
+        "schema": {
+          "$ref": "#/definitions/HistoricalSnapshot"
+        }
+      }
+    },
+    "tags": [
+      "panels"
+    ]
+  },
+  "parameters": [
+    {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    }
+  ]
+}

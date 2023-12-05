@@ -1,0 +1,46 @@
+{
+  "host": "panelapp.genomicsengland.co.uk",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/api/v1",
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Format: \"Token <strong>your token</strong>\". You can find API token in your <a href=\"/accounts/profile/\">profile page</a>"
+    }
+  },
+  "security": [
+    {
+      "api_key": []
+    }
+  ],
+  "endpoint": "/panels/{id}/",
+  "get": {
+    "operationId": "panels_read",
+    "summary": "Get individual Panel data",
+    "description": "In addition to the model fields this endpoint also returns `genes`, `strs`, `regions` associated with this panel.\n\nAdditional parameters:\n\n?version=1.1 - get a specific version for this panel",
+    "parameters": [],
+    "responses": {
+      "200": {
+        "description": "",
+        "schema": {
+          "$ref": "#/definitions/Panel"
+        }
+      }
+    },
+    "tags": [
+      "panels"
+    ]
+  },
+  "parameters": [
+    {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "type": "string"
+    }
+  ]
+}
