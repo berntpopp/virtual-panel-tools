@@ -57,6 +57,11 @@ const executeApiRequest = async (config, endpointDetails, userParams) => {
     // Construct URL
     const url = `${config.schemes[0]}://${config.host}${config.basePath}${config.endpoint}?${queryParams}`;
 
+    // Display URL if in verbose mode
+    if (argv.verbose) {
+        console.log(`Constructed URL: ${url}`);
+    }
+
     // Execute API request
     try {
         const response = await axios.get(url);
@@ -88,6 +93,11 @@ const argv = yargs(hideBin(process.argv))
         alias: 'p',
         describe: 'String of API request parameters',
         type: 'string',
+    })
+    .option('verbose', {
+        describe: 'Run in verbose mode',
+        type: 'boolean',
+        default: false,
     })
     .version(package.version) // Use version from package.json
     .alias('v', 'version')
